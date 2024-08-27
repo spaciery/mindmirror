@@ -10,6 +10,8 @@ mindmirror can
 - code
 and much more
 
+![screenshot](./images/screenshot.png "screenshot")
+
 ## Installation
 
 1. Clone this repo and build it using go
@@ -21,7 +23,9 @@ go build mindmirror.go
 
 2. replace the content folder with your notes
 
-3. run the server with following flags
+## Usage
+
+run the server with following flags
 
 - g - generate the pages
 - c - clean previously generated pages if any

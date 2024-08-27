@@ -242,7 +242,6 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 
 	filePath := filepath.Join(OUT_DIRECTORY, r.URL.Path)
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		// If the file doesn't exist, try appending .html
 		filePath = filePath + ".html"
 		if _, err := os.Stat(filePath); os.IsNotExist(err) {
 			http.NotFound(w, r)
@@ -267,7 +266,7 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Index</title>
+    <title>MindMirror</title>
     <link rel="stylesheet" href="/styles/server.css">
 </head>
 <body>
