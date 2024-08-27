@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector Specificity</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="selector-specificity">Selector Specificity</h1>
+<p>Specificity is the order by which the browser decides which CSS styles will be displayed. A best practice in CSS is to style elements while using the lowest degree of specificity so that if an element needs a new style, it is easy to override.</p>
+<p>IDs are the most specific selector in CSS, followed by classes, and finally, type.</p>
+<pre><code class="language-html">&lt;h1 class='headline'&gt;Breaking News&lt;/h1&gt;
+</code></pre>
+<pre><code class="language-css">h1 {
+  color: red;
+}
+
+.headline {
+  color: firebrick;
+}
+</code></pre>
+<p>In the example code above, the color of the heading would be set to <code>firebrick</code>,as the class selector is more specific than the type selector. If an ID attribute (and selector) were added to the code above, the styles within the ID selector’s body would override all other styles for the heading.</p>
+
+</body>
+</html>

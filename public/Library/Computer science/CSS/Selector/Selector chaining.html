@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector chaining</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="selector-chaining">Selector chaining</h1>
+<p>When writing CSS rules, it’s possible to require an HTML element to have two or more CSS selectors at the same time.</p>
+<p>This is done by combining multiple selectors, which we will refer to as chaining. For instance, if there was a <code>special</code> class for <code>&lt;h1&gt;</code> elements, the CSS would look like below:</p>
+<pre><code class="language-css">h1.special {
+
+}
+</code></pre>
+<p>The code above would select only the <code>&lt;h1&gt;</code> elements with a class of <code>special</code>. If a <code>&lt;p&gt;</code> element also had a class of <code>special</code>, the rule in the example would not style the paragraph.</p>
+<p>Adding more than one tag, class, or ID to a CSS selector increases the specificity of the CSS selector.</p>
+
+</body>
+</html>

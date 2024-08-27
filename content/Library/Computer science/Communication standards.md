@@ -1,0 +1,7 @@
+# Communication standards
+
+[REST](Communication%20standards%20efd59fc9a48540c48af8504e04fc35ec/REST%205cb7bc6742da4c149296de5cafd60374.md)
+
+[GraphQL](Communication%20standards%20efd59fc9a48540c48af8504e04fc35ec/GraphQL%2045fd385711ee4ed3ab63d77c619c7b9f.md)
+
+[gRPC](Communication%20standards%20efd59fc9a48540c48af8504e04fc35ec/gRPC%20761f33eb64be489d8140428f4dc078ff.md)

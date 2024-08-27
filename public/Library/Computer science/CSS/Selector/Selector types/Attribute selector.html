@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attribute selector</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="attribute-selector">Attribute selector</h1>
+<p>The <em>attribute selector</em> can be used to target HTML elements that already contain attributes. Elements of the same type can be targeted differently by their attribute or attribute value. This alleviates the need to add new code, like the <code>class</code> or <code>id</code> attributes.</p>
+<p>Attributes can be selected similarly to types, classes, and IDs.</p>
+<pre><code class="language-css">[href]{
+   color: magenta;
+}
+</code></pre>
+<p>The most basic syntax is an attribute surrounded by square brackets. In the above example: <code>[href]</code> would target all elements with an <code>href</code> attribute and set the <a href="https://www.codecademy.com/resources/docs/css/colors/color"><code>color</code> to <code>magenta</code>.And it can get <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors#syntax">more granular from there by adding type and/or attribute values. One way is by using <code>type[attribute*=value]</code>.In short, this code selects an element where the attribute contains any instance of the specified value. Let’s take a look at an example.</p>
+<pre><code class="language-html">&lt;img src='/images/seasons/cold/winter.jpg'&gt;
+&lt;img src='/images/seasons/warm/summer.jpg'&gt;
+</code></pre>
+<p>The HTML code above renders two <a href="https://www.codecademy.com/resources/docs/html/elements/img?page_req=catalog"><code>&lt;img&gt;</code> elements, each containing a <code>src</code> attribute with a value equaling a link to an image file.</p>
+<pre><code class="language-css">img[src*='winter'] {
+  height: 50px;
+}
+
+img[src*='summer'] {
+  height: 100px;
+}
+</code></pre>
+<p>Now take a look at the above CSS code. The <em>attribute selector</em> is used to target each image individually.</p>
+<ul>
+<li>The first ruleset looks for an <code>img</code> element with an attribute of <code>src</code> that contains the string <code>'winter'</code>, and sets the <a href="https://www.codecademy.com/resources/docs/css/sizing/height"><code>height</code> to <code>50px</code>.</li>
+<li>The second ruleset looks for an <code>img</code> element with an attribute of <code>src</code> that contains the string <code>'summer'</code>, and sets the <code>height</code> to <code>100px</code>.</li>
+</ul>
+<p>Notice how no new HTML markup (like a class or id) needed to be added, and we were still able to modify the styles of each image independently. This is one advantage to using the<br />
+attribute selector!</p>
+
+</body>
+</html>

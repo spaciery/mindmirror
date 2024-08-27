@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="networking">Networking</h1>
+<p>A networking service that you can use to establish boundaries around your AWS resources is <a href="https://aws.amazon.com/vpc/"><strong>Amazon Virtual Private Cloud (Amazon VPC)</strong></p>
+<p>Amazon VPC enables you to provision an isolated section of the AWS Cloud. In this isolated section, you can launch resources in a virtual network that you define. Within a virtual private cloud (VPC), you can organize your resources into subnets. A <strong>subnet</strong> is a section of a VPC that can contain resources such as Amazon EC2 instances.</p>
+<h2 id="internet-gateway"><strong>Internet gateway</strong></h2>
+<p>To allow public traffic from the internet to access your VPC, you attach an <strong>internet gateway</strong> to the VPC. An internet gateway is a connection between a VPC and the internet. You can think of an internet gateway as being similar to a doorway that customers use to enter the coffee shop. Without an internet gateway, no one can access the resources within your VPC.</p>
+<p><img src="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/zUWapGL6CscxDBO-_NEblbQjD0vn0-pPU.png" alt="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/zUWapGL6CscxDBO-_NEblbQjD0vn0-pPU.png" /></p>
+<h2 id="virtual-private-gateway"><strong>Virtual private gateway</strong></h2>
+<p>To access private resources in a VPC, you can use a <strong>virtual private gateway</strong>.</p>
+<p><img src="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/Qnh2PeTY4KJ1Bg4E_s8U3lQzEONXm1FMX.png" alt="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/Qnh2PeTY4KJ1Bg4E_s8U3lQzEONXm1FMX.png" /></p>
+<h2 id="aws-direct-connect"><strong>AWS Direct Connect</strong></h2>
+<p><a href="https://aws.amazon.com/directconnect/">**AWS Direct Connect** is a service that lets you to establish a dedicated private connection between your data center and a VPC.</p>
+<p><img src="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/ICJ98A_JYucjg9bl_YdzRvczPABE_j-yV.png" alt="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/ICJ98A_JYucjg9bl_YdzRvczPABE_j-yV.png" /></p>
+<h2 id="subnets"><strong>Subnets</strong></h2>
+<p>In a VPC, <strong>subnets</strong> are separate areas that are used to group together resources.</p>
+<p><strong>Public subnets</strong> contain resources that need to be accessible by the public, such as an online store’s website.</p>
+<p><strong>Private subnets</strong> contain resources that should be accessible only through your private network, such as a database that contains customers’ personal information and order histories.</p>
+<p>In a VPC, subnets can communicate with each other. For example, you might have an application  that involves Amazon EC2 instances in a public subnet communicating with databases that are located in a private subnet.</p>
+<h2 id="network-acls"><strong>Network ACLs</strong></h2>
+<p>When a customer requests data from an application hosted in the AWS Cloud, this request is sent as a packet. A <strong>packet</strong> is a unit of data sent over the internet or a network.</p>
+<p>It enters into a VPC through an internet gateway. Before a packet can enter into a subnet or exit from a subnet, it checks for permissions. These permissions indicate who sent the packet and how the packet is trying to communicate with the resources in a subnet.</p>
+<p>The VPC component that checks packet permissions for subnets is a <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html"><strong>network access control list (ACL)</strong></p>
+<p>A network ACL is a virtual firewall that controls inbound and outbound traffic at the subnet level.<br />
+Network ACLs perform <strong>stateless</strong> packet filtering. They remember nothing and check packets that cross the subnet border each way: inbound and outbound. </p>
+<p>Each AWS account includes a default network ACL. When configuring your VPC, you can use your account’s default network ACL or create custom network ACLs.</p>
+<p>By default, your account’s default network ACL allows all inbound and outbound traffic, but you can modify it by adding your own rules. For custom network ACLs, all inbound and outbound traffic is denied until you add rules to specify which traffic to allow. Additionally, all network ACLs have an explicit deny rule. This rule ensures that if a packet doesn’t match any of the other rules on the list, the packet is denied.</p>
+<h2 id="security-groups"><strong>Security groups</strong></h2>
+<p>A security group is a virtual firewall that controls inbound and outbound traffic for an Amazon EC2 instance.</p>
+<p>By default, a security group denies all inbound traffic and allows all outbound traffic. You can add custom rules to configure which traffic should be allowed; any other traffic would then be denied.If you have multiple Amazon EC2 instances within the same VPC, you can associate them with the same security group or use different security groups for each instance.<br />
+Security groups perform <strong>stateful</strong> packet filtering.</p>
+<p><img src="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/TYGTiKs6Rex-XWXm_ha8um-1InZb0jryB.png" alt="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/TYGTiKs6Rex-XWXm_ha8um-1InZb0jryB.png" /></p>
+<h2 id="domain-name-system-dns"><strong>Domain Name System (DNS)</strong></h2>
+<p>Suppose that StreetFuse has a website hosted in the AWS Cloud. Customers enter the web address into their browser, and they are able to access the website. This happens because of <strong>Domain Name System (DNS)</strong> resolution. DNS resolution involves a customer DNS resolver communicating with a company DNS server.</p>
+<p>You can think of DNS as being the phone book of the internet. DNS resolution is the process of translating a domain name to an IP address.</p>
+<p><img src="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/fuKyjNqTn5bpoPAr_AFBIDcTkYnYj1OOb.png" alt="https://explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/1717938000/5fUinWtdNCCY9VRVnNP54w/tincan/c8957d640c3a0f679bf6e6bb7f125de41ac6ad45/assets/fuKyjNqTn5bpoPAr_AFBIDcTkYnYj1OOb.png" /></p>
+<h2 id="amazon-route-53"><strong>Amazon Route 53</strong></h2>
+<p><a href="https://aws.amazon.com/route53">**Amazon Route 53** is a DNS web service. It gives developers and businesses a reliable way to route end users to internet applications hosted in AWS.</p>
+
+</body>
+</html>

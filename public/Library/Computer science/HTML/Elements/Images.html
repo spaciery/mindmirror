@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="images">Images</h1>
+<p>The <code>&lt;img&gt;</code> tag allows you to add an image to a web page. Most elements require both opening and closing tags, but the <code>&lt;img&gt;</code> tag is a <em>self-closing tag</em>. Note that the end of the <code>&lt;img&gt;</code> tag has a forward slash <code>/</code>. Self-closing tags may include or omit the final slash — both will render properly.</p>
+<pre><code class="language-html">&lt;img src=&quot;image-location.jpg&quot; /&gt;
+</code></pre>
+<p>The <code>&lt;img&gt;</code> tag has a required <em>attribute</em> called <code>src</code>. The <code>src</code> attribute must be set to the image’s <em>source</em>, or the location of the image. In this case, the value of <code>src</code> must be the <em>uniform resource locator</em> (URL) of the image. A URL is the web address or local address where a file is stored</p>
+<p>The <code>alt</code> attribute, which means alternative text, brings meaning to the <a href="https://www.codecademy.com/resources/docs/html/images">images on our sites. The <code>alt</code> attribute can be added to the image tag just like the <a href="https://www.codecademy.com/resources/docs/html/attributes/src"><code>src</code> attribute.  The value of <code>alt</code> should be a description of the image.</p>
+<pre><code class="language-html">&lt;img src=&quot;#&quot; alt=&quot;A field of yellow sunflowers&quot; /&gt;
+</code></pre>
+<p>The <code>alt</code> attribute also serves the following purposes:</p>
+<ul>
+<li>If an image fails to load on a web page, a<br />
+user can mouse over the area originally intended for the image and read a brief description of the image. This is made possible by the<br />
+description you provide in the <code>alt</code> attribute.</li>
+<li>Visually impaired users often browse the web with the aid of screen reading software. When you include the <code>alt</code> attribute, the screen reading software can read the image’s description out loud to the visually impaired user.</li>
+<li>The <code>alt</code> attribute also plays a role in Search Engine Optimization (SEO),<br />
+because search engines cannot “see” the images on websites as they crawl the internet. Having descriptive <code>alt</code> <a href="https://www.codecademy.com/resources/docs/html/attributes">attributes can improve the ranking of your site.</li>
+</ul>
+<p>If the image on the web page is not one that conveys any meaningful information to a user (visually impaired or otherwise), the <code>alt</code> attribute should be left empty.</p>
+
+</body>
+</html>

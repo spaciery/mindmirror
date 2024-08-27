@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="overflow">Overflow</h1>
+<p>All of the components of the <a href="https://www.codecademy.com/resources/docs/css/box-model">box model comprise an element’s size. For example, an image that has the following dimensions is 364 pixels wide and 244 pixels tall.</p>
+<ul>
+<li>300 pixels wide</li>
+<li>200 pixels tall</li>
+<li>10 pixels <a href="https://www.codecademy.com/resources/docs/css/padding">padding on the left and right</li>
+<li>10 pixels padding on the top and bottom</li>
+<li>2 pixels <a href="https://www.codecademy.com/resources/docs/css/borders/border">border on the left and right</li>
+<li>2 pixels border on the top and bottom</li>
+<li>20 pixels <a href="https://www.codecademy.com/resources/docs/css/margins/margin">margin on the left and right</li>
+<li>10 pixels margin on the top and bottom</li>
+</ul>
+<p>The total dimensions (364px by 244px) are calculated by adding all of the vertical dimensions together and all of the horizontal dimensions together. Sometimes, these components result<br />
+in an element that is larger than the parent’s containing area. How can we ensure that we can view all of an element that is larger than its parent’s containing area?</p>
+<p>The <code>overflow</code> property controls what happens to content that spills, or overflows, outside its box. The most commonly used values are:</p>
+<ul>
+<li><code>hidden</code>—when set to this value, any content that overflows will be hidden from view.</li>
+<li><code>scroll</code>—when set to this value, a scrollbar will be added to the element’s box so<br />
+that the rest of the content can be viewed by scrolling.</li>
+<li><code>visible</code>—when set to this value, the overflow content will be displayed outside of<br />
+the containing element. Note, this is the default value.</li>
+</ul>
+<pre><code>p {
+  overflow: scroll;
+}
+
+</code></pre>
+<p>The overflow property is set on a parent element to instruct a web browser on how to render child elements. For example, if a div’s overflow property is set to <code>scroll</code>, all children of this div will display overflowing content with a scroll bar.</p>
+
+</body>
+</html>

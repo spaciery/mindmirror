@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Selectors</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="multiple-selectors">Multiple Selectors</h1>
+<p>In order to make CSS more concise, it’s possible to add CSS styles to multiple CSS selectors all at once. This prevents writing repetitive code.</p>
+<p>For instance, the following code has repetitive style attributes:</p>
+<pre><code class="language-css">h1 {
+  font-family: Georgia;
+}
+
+.menu {
+  font-family: Georgia;
+}
+</code></pre>
+<p>Instead of writing <code>font-family: Georgia</code> twice for two selectors, we can separate the selectors by a comma to apply the same style to both, like this:</p>
+<pre><code class="language-css">h1,
+.menu {
+  font-family: Georgia;
+}
+
+</code></pre>
+
+</body>
+</html>

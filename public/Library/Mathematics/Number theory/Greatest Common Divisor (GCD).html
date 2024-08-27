@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greatest Common Divisor (GCD)</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+    <h1 id="greatest-common-divisor-gcd">Greatest Common Divisor (GCD)</h1>
+<p><strong>Greatest Common Divisor (GCD)</strong>: The GCD or greatest common factor (GCF) of two or more integers is the largest positive integer that divides each of the numbers without leaving a remainder. For example, the GCD of 12 and 18 is  6</p>
+<p>Methods to derive GCD :</p>
+<ol>
+<li>
+<p>By listing out all factors and taking the largest common one .The process may be split up using the method of factor pairs: once one determines a factor $a$ of a number $n$ , the quotient $\frac{n}{a}$ is necessarily a factor as well .this is very ineffective</p>
+<p><img src="Greatest%20Common%20Divisor%20(GCD)%20c96e9824f1d44280acf2096557dae976/Untitled.png" alt="source brilliant.org" /></p>
+<p>source brilliant.org</p>
+</li>
+<li>
+<p>A somewhat more efficient method is to first compute the <a href="https://brilliant.org/wiki/prime-factorization/">prime factorization of each number in the set. The resulting GCD is the product of the primes that appear in every factorization, to the smallest exponent seen in the factorizations.</p>
+<p><img src="Greatest%20Common%20Divisor%20(GCD)%20c96e9824f1d44280acf2096557dae976/Untitled%201.png" alt="Untitled" /></p>
+<p>ie . if</p>
+<p>$$<br />
+a=p_1^{α1}p_2^{α2}…p_k^{αk} \b=p_1^{β1}p_2^{β2}…p_k^{βk}<br />
+$$</p>
+<p>then</p>
+<p>$$<br />
+gcd(a,b) = p_1^{min(α1,β1)}p_2^{min(α2,β2)}...p_k^{min(αk,βk)}<br />
+$$</p>
+</li>
+<li>
+<p>Euclidian algorithm</p>
+</li>
+</ol>
+
+</body>
+</html>
