@@ -7,4 +7,7 @@ require (
 	github.com/yuin/goldmark v1.7.4
 )
 
-require golang.org/x/sys v0.4.0 // indirect
+require (
+	github.com/litao91/goldmark-mathjax v0.0.0-20210217064022-a43cf739a50f // indirect
+	golang.org/x/sys v0.4.0 // indirect
+)

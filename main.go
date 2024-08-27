@@ -13,6 +13,7 @@ import (
 	"sort"
 	"strings"
 
+	mathjax "github.com/litao91/goldmark-mathjax"
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/ast"
 	"github.com/yuin/goldmark/extension"
@@ -27,20 +28,20 @@ const (
 	OUT_DIRECTORY             = "./public"
 	DEFAULT_CSS_FILE          = "./styles/default.css"
 	SCRIPT_HTML               = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>%s</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
-</head>
-<body>
-    %s
-</body>
-</html>
+		<!DOCTYPE html>
+		<html lang="en">
+		<head>
+    		<meta charset="UTF-8">
+      		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        	<title>%s</title>
+         	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+          	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+           	<link rel="stylesheet" href="/styles/default.css">
+        </head>
+        <body>
+        %s
+        </body>
+        </html>
 `
 )
 
@@ -55,9 +56,17 @@ func main() {
 
 	generate := flag.Bool("g", false, "Generate the static site")
 	serve := flag.Bool("s", false, "Serve the static site")
+	clean := flag.Bool("c", false, "Clean previous out")
 	flag.StringVar(&contentDirectory, "d", DEFAULT_CONTENT_DIRECTORY, "Specify the content directory")
 	flag.StringVar(&cssFile, "css", DEFAULT_CSS_FILE, "Specify the CSS file to use")
 	flag.Parse()
+
+	if *clean {
+		err := cleanPublic()
+		if err != nil {
+			log.Fatal("cleaning failed , exiting .. ")
+		}
+	}
 
 	if *generate {
 		generateSite()
@@ -70,6 +79,24 @@ func main() {
 	if !*generate && !*serve {
 		fmt.Println("Please specify at least one action: -g to generate, -s to serve")
 	}
+}
+
+func cleanPublic() error {
+
+	if _, err := os.Stat(OUT_DIRECTORY); os.IsNotExist(err) {
+		log.Printf("Directory %s does not exist, nothing to clean.\n", OUT_DIRECTORY)
+		return nil
+	}
+
+	err := os.RemoveAll(OUT_DIRECTORY)
+	if err != nil {
+		log.Printf("Error removing directory %s: %v\n", OUT_DIRECTORY, err)
+		return err
+	}
+
+	log.Printf("Successfully removed directory %s\n", OUT_DIRECTORY)
+
+	return nil
 }
 
 func generateSite() {
@@ -130,6 +157,7 @@ func copyCSSFile() error {
 func initializeGoldmark() {
 
 	md = goldmark.New(
+		goldmark.WithExtensions(mathjax.MathJax),
 		goldmark.WithExtensions(extension.GFM),
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),
@@ -226,6 +254,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveIndex(w http.ResponseWriter, r *http.Request) {
+
 	files, err := getHTMLFiles(OUT_DIRECTORY)
 	if err != nil {
 		http.Error(w, "Error reading directory", http.StatusInternalServerError)
@@ -242,11 +271,20 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
     <link rel="stylesheet" href="/styles/server.css">
 </head>
 <body>
-    <h1>Site Index</h1>
+    <div id='nav'>
+    <h1>MindMirror_</h1>
+    <h2>↙ Index</h1>
+    </div>
+    <div id="body-cont">
+    <div id="image">
+    <img id="randomImage" alt="Random Image" style="max-width: 100%; height: auto;">
+    </div>
     <div id="file-tree">
         {{.}}
+        </div>
     </div>
     <script src="/scripts/tree.js"></script>
+    <script src="/scripts/image.js"></script>
 </body>
 </html>
 `
@@ -265,44 +303,40 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func buildTree(files []string) string {
-	var result strings.Builder
-	result.WriteString("<ul>")
+
+	var tree strings.Builder
+	tree.WriteString("<ul>")
 
 	var currentPath []string
 	for _, file := range files {
 		parts := strings.Split(file, string(filepath.Separator))
 
-		// Find the common prefix
 		i := 0
 		for i < len(currentPath) && i < len(parts) && currentPath[i] == parts[i] {
 			i++
 		}
 
-		// Close open folders
 		for j := len(currentPath); j > i; j-- {
-			result.WriteString("</ul></li>")
+			tree.WriteString("</ul></li>")
 		}
 
-		// Open new folders
 		for j := i; j < len(parts)-1; j++ {
-			result.WriteString("<li><span class='folder'>▶ " + parts[j] + "</span><ul>")
+			tree.WriteString("<li><span class='folder'>" + parts[j] + "</span><ul class='nested-item'>")
 		}
 
-		// Add file
 		fileName := parts[len(parts)-1]
 		displayName := strings.TrimSuffix(fileName, ".html")
-		result.WriteString("<li><a href='" + file + "'>" + displayName + "</a></li>")
+		tree.WriteString("<li class='html-file'><a href='" + file + "'>" + displayName + "</a></li>")
 
 		currentPath = parts[:len(parts)-1]
 	}
 
-	// Close any remaining open folders
 	for range currentPath {
-		result.WriteString("</ul></li>")
+		tree.WriteString("</ul></li>")
 	}
 
-	result.WriteString("</ul>")
-	return result.String()
+	tree.WriteString("</ul>")
+	return tree.String()
 }
 
 func getHTMLFiles(dir string) ([]string, error) {
