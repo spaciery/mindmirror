@@ -17,12 +17,16 @@ and much more
 git clone https://github.com/samintejas/mindmirror.git
 cd mindmirror
 go build mindmirror.go
-``
+```
+
 2. replace the content folder with your notes
+
 3. run the server with following flags
+
 - g - generate the pages
 - c - clean previously generated pages if any
 - s - start the server
+
 ```sh
 ./mindmirror -c -g -s
 ```
