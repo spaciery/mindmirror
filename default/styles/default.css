@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&family=Source+Code+Pro&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Source Sans Pro", Arial, sans-serif;
+    font-size: 24px;
+    color: #e0e0e0;
+    background-color: #1a1a1a;
+    line-height: 1.6;
+    padding: 5vh 5vw;
+    font-feature-settings:
+        "liga" 1,
+        "calt" 1; /* Enable ligatures for supported browsers */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: #e78868;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+p {
+    color: #cccccc;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+blockquote {
+    background-color: #2a2a2a;
+    border-left: 5px solid #61dafb;
+    color: #e0e0e0;
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-style: italic;
+}
+
+pre,
+code {
+    font-family: "Source Code Pro", monospace;
+    font-size: 0.9em;
+}
+
+pre {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+ul,
+ol {
+    margin: 20px 0;
+    padding-left: 40px;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #61dafb;
+    margin: 40px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th,
+td {
+    border: 1px solid #444;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #2a2a2a;
+    color: #61dafb;
+    font-weight: 600;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media screen and (min-width: 768px) {
+    body {
+        padding-top: 25vh;
+        padding-bottom: 10vh;
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-left: 25vw;
+        margin-right: 25vw;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        padding: 5vh 5vw;
+        font-size: 14px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-bottom: 15px;
+    }
+
+    p,
+    ul,
+    ol {
+        margin-bottom: 15px;
+    }
+
+    blockquote {
+        margin: 15px 0;
+        padding: 10px 15px;
+    }
+
+    pre {
+        padding: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+}
