@@ -1,0 +1,15 @@
+app:
+  port: 8080
+  content:
+    sourcetype: local
+    git: samin.dev
+    branch: samin.dev
+    source: ../content
+    dest: ~/tmp/mindmirror/public
+  styles:
+    path: ../default/styles
+    stylesheets:
+      index: server.css
+      pages: default.css
+  scripts:
+    path: ../default/scripts
