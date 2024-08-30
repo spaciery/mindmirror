@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"samin.dev/mindmirror/builder"
 )
 
@@ -35,10 +36,10 @@ the source and destination can be provided`,
 func runBuild(cmd *cobra.Command, args []string) {
 
 	b := builder.Builder{
-		TempDir:    "../public",
-		SourceDir:  "../content",
+		TempDir:    viper.GetString("app.content.dest"),
+		SourceDir:  viper.GetString("app.content.source"),
 		HeaderHtml: SCRIPT_HTML,
-		StyleSheet: "../styles/default.css",
+		StyleSheet: viper.GetString("app.styles.path") + "/" + viper.GetString("app.styles.stylesheets.pages"),
 	}
 
 	b.GenerateSite()

@@ -65,7 +65,7 @@ func copyCSSFile(tempDir string, stylesheet string) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Println(stylesheet)
 	source, err := os.Open(stylesheet)
 	if err != nil {
 		return err

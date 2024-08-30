@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"samin.dev/mindmirror/server"
 )
 
@@ -15,15 +16,16 @@ content have to be build before running the server`,
 
 func runCommand(cmd *cobra.Command, args []string) {
 	app := &server.AppServer{
-		Port:       "8080",
-		PageSrcDir: "../public",
-		StylesDir:  "../styles",
-		ScriptsDir: "../scripts",
+		Port:       viper.GetString("app.port"),
+		PageSrcDir: viper.GetString("app.content.dest"),
+		StylesDir:  viper.GetString("app.styles.path"),
+		ScriptsDir: viper.GetString("app.scripts.path"),
 	}
 	app.Serve()
 }
 
 func init() {
+	runCmd.Flags().StringP("port", "p", "8080", "port to run mindmirror on")
+	viper.BindPFlag("app.port", runCmd.Flags().Lookup("port"))
 	rootCmd.AddCommand(runCmd)
-	rootCmd.Flags().StringP("port", "p", "8080", "port to run mindmirror on")
 }
