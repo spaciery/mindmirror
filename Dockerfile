@@ -11,5 +11,5 @@ RUN go build -o mindmirror .
 FROM alpine:latest
 WORKDIR /root/
 COPY --from=build /app/mindmirror .
-EXPOSE 8080
+EXPOSE 8081
 CMD ["./mindmirror"]
