@@ -1,5 +1,5 @@
 # Step 1: Build the Go application
-FROM golang:1.23 AS build
+FROM golang:1.20 AS build
 
 WORKDIR /app
 COPY go.mod go.sum ./
