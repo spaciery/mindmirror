@@ -5,7 +5,7 @@ app:
     git: samin.dev
     branch: samin.dev
     source: ../content
-    dest: ~/tmp/mindmirror/public
+    dest: ../tmp/mindmirror/public
   styles:
     path: ../default/styles
     stylesheets:

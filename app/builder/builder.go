@@ -95,10 +95,6 @@ func (b *Builder) initializeGoldmark() {
 		goldmark.WithParserOptions(
 			parser.WithAutoHeadingID(),
 		),
-		// goldmark.WithRendererOptions(
-		// 	html.WithHardWraps(),
-		// 	html.WithXHTML(),
-		// ),
 	)
 }
 
@@ -110,7 +106,7 @@ func (b *Builder) processMarkdownFile(path string) error {
 	}
 
 	if lastMod, exists := b.FileInfo[path]; exists && lastMod.Equal(info.ModTime()) {
-		fmt.Printf("Skipping unchanged file: %s\n", path)
+		// fmt.Printf("Skipping unchanged file: %s\n", path)
 		return nil
 	}
 
