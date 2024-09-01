@@ -12,4 +12,4 @@ FROM alpine:latest
 WORKDIR /root/
 COPY --from=build /app/mindmirror .
 EXPOSE 8081
-CMD ["./mindmirror run -p 8081"]
+CMD ["./mindmirror"]
