@@ -1,6 +1,6 @@
 module samin.dev/mindmirror
 
-go 1.20
+go 1.23.0
 
 require (
 	github.com/litao91/goldmark-mathjax v0.0.0-20210217064022-a43cf739a50f
