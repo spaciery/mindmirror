@@ -81,6 +81,4 @@ func initConfigs() {
 		os.Exit(1)
 	}
 
-	fmt.Fprintln(os.Stdout, "using config file : ", viper.ConfigFileUsed())
-
 }
