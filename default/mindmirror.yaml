@@ -4,12 +4,12 @@ app:
     sourcetype: local
     git: samin.dev
     branch: samin.dev
-    source: ../content
-    dest: ../tmp/mindmirror/public
+    source: /home/samin/repo/notes
+    dest: /home/samin/tmp/mindmirror/public
   styles:
-    path: ../default/styles
+    path: /home/samin/.config/mindmirror/styles
     stylesheets:
       index: server.css
       pages: default.css
   scripts:
-    path: ../default/scripts
+    path: /home/samin/.config/mindmirror/scripts
