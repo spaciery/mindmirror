@@ -29,18 +29,12 @@ type Builder struct {
 
 func (b *Builder) GenerateSite() {
 
-	err := copyCSSFile(b.TempDir, b.StyleSheet)
-	if err != nil {
-		log.Printf("Error copying CSS file: %v\n", err)
-		return
-	}
-
 	b.initializeGoldmark()
 	b.loadFileInfo()
 
 	os.MkdirAll(b.TempDir, os.ModePerm)
 
-	err = filepath.Walk(b.SourceDir, func(path string, info os.FileInfo, err error) error {
+	err := filepath.Walk(b.SourceDir, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
