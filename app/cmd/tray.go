@@ -46,7 +46,7 @@ func loadIcon(path string) []byte {
 
 func onReady() {
 
-	iconStop = loadIcon(viper.GetString("app.styles.path") + "/rec.png")
+	iconStop = loadIcon(viper.GetString("app.styles.path") + "/lotus(2).png")
 	iconRunning = loadIcon(viper.GetString("app.styles.path") + "/lotus.png")
 
 	app = &server.AppServer{
