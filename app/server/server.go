@@ -68,7 +68,8 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindMirror</title>
-    <link rel="stylesheet" href="/styles/server.css">
+   <link rel="stylesheet" href="/styles/water-auto.css">
+   <link rel="stylesheet" href="/styles/imhome.css">
 </head>
 <body>
     <div id='nav'>
