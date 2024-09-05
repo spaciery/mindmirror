@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"fmt"
 	"html/template"
 	"log"
@@ -9,6 +10,7 @@ import (
 	"path/filepath"
 	"sort"
 	"strings"
+	"time"
 )
 
 type AppServer struct {
@@ -19,6 +21,36 @@ type AppServer struct {
 }
 
 var pageSourceDir string
+
+func (app *AppServer) ServeWithContext(ctx context.Context) error {
+	pageSourceDir = app.PageSrcDir
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", handleRequest)
+	mux.Handle("/styles/", http.StripPrefix("/styles/", http.FileServer(http.Dir(app.StylesDir))))
+	mux.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir(app.ScriptsDir))))
+
+	server := &http.Server{
+		Addr:    fmt.Sprintf(":%s", app.Port),
+		Handler: mux,
+	}
+
+	go func() {
+		<-ctx.Done()
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		if err := server.Shutdown(shutdownCtx); err != nil {
+			log.Printf("Server shutdown error: %v", err)
+		}
+	}()
+
+	log.Printf("Serving site on http://localhost:%s\n", app.Port)
+	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		return fmt.Errorf("server error: %w", err)
+	}
+
+	return nil
+}
 
 func (app *AppServer) Serve() {
 
