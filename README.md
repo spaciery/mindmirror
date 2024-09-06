@@ -13,8 +13,6 @@
 - And much more!
 
 ![Example Setup](./images/exsetup.png "screenshot")
-![Home](./images/home.png "screenshot")
-![Systray](./images/systray.png "screenshot")
 
 ## Installation
 
