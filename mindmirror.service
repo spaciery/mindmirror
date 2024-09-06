@@ -1,0 +1,14 @@
+[Unit]
+Description=Mindmirror Go Program
+After=network.target
+
+[Service]
+ExecStart=/home/samin/lib/go/bin/mindmirror
+Restart=always
+User=samin
+WorkingDirectory=/home/samin/lib/go
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
