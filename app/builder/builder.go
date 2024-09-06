@@ -41,11 +41,8 @@ func (b *Builder) GenerateSite() {
 		if info.IsDir() {
 			return nil
 		}
-		if filepath.Ext(path) != ".md" {
-			return nil
-		}
 
-		return b.processMarkdownFile(path)
+		return b.processFile(path)
 
 	})
 
@@ -92,33 +89,42 @@ func (b *Builder) initializeGoldmark() {
 	)
 }
 
-func (b *Builder) processMarkdownFile(path string) error {
-
+func (b *Builder) processFile(path string) error {
 	info, err := os.Stat(path)
 	if err != nil {
 		return fmt.Errorf("failed to get file info for %s: %w", path, err)
 	}
-
 	if lastMod, exists := b.FileInfo[path]; exists && lastMod.Equal(info.ModTime()) {
 		// fmt.Printf("Skipping unchanged file: %s\n", path)
 		return nil
 	}
 
+	relPath, err := filepath.Rel(b.SourceDir, path)
+	if err != nil {
+		return fmt.Errorf("failed to get relative path: %w", err)
+	}
+
+	switch filepath.Ext(path) {
+	case ".md":
+		return b.processMarkdownFile(path, relPath, info)
+	case ".png", ".jpg", ".jpeg":
+		return b.processImageFile(path, relPath, info)
+	default:
+		// Optionally handle other file types or ignore them
+		return nil
+	}
+}
+
+func (b *Builder) processMarkdownFile(path, relPath string, info os.FileInfo) error {
 	content, err := os.ReadFile(path)
 	if err != nil {
 		return fmt.Errorf("failed to read file %s: %w", path, err)
 	}
 
 	preProcessedContent := b.preprocessMarkdown(string(content))
-
 	var buf bytes.Buffer
 	if err := b.md.Convert([]byte(preProcessedContent), &buf); err != nil {
 		return fmt.Errorf("failed to convert markdown: %w", err)
-	}
-
-	relPath, err := filepath.Rel(b.SourceDir, path)
-	if err != nil {
-		return fmt.Errorf("failed to get relative path: %w", err)
 	}
 
 	outPath := filepath.Join(b.TempDir, strings.TrimSuffix(relPath, ".md")+".html")
@@ -128,15 +134,45 @@ func (b *Builder) processMarkdownFile(path string) error {
 
 	title := strings.TrimSuffix(filepath.Base(path), ".md")
 	fullHTML := fmt.Sprintf(b.HeaderHtml, title, buf.String())
-
 	if err := os.WriteFile(outPath, []byte(fullHTML), 0644); err != nil {
 		return fmt.Errorf("failed to write file %s: %w", outPath, err)
 	}
 
 	b.FileInfo[path] = info.ModTime()
-
 	fmt.Printf("Generated: %s\n", outPath)
 	return nil
+}
+
+func (b *Builder) processImageFile(path, relPath string, info os.FileInfo) error {
+	outPath := filepath.Join(b.TempDir, relPath)
+	if err := os.MkdirAll(filepath.Dir(outPath), os.ModePerm); err != nil {
+		return fmt.Errorf("failed to create directory: %w", err)
+	}
+
+	if err := copyFile(path, outPath); err != nil {
+		return fmt.Errorf("failed to copy image file %s: %w", path, err)
+	}
+
+	b.FileInfo[path] = info.ModTime()
+	fmt.Printf("Copied: %s\n", outPath)
+	return nil
+}
+
+func copyFile(src, dst string) error {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer sourceFile.Close()
+
+	destFile, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer destFile.Close()
+
+	_, err = io.Copy(destFile, sourceFile)
+	return err
 }
 
 func (b *Builder) preprocessMarkdown(content string) string {
