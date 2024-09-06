@@ -1,6 +1,6 @@
 # Mindmirror
 
-**Mindmirror** is a minimal static site generator designed for simple and customizable note-taking. It supports standard Markdown, thanks to Goldmark, and offers a variety of features that make managing and viewing notes effortless.
+**Mindmirror** is a minimal static site generator designed for simple and customizable note-taking. It supports standard Markdown, thanks to Goldmark, and offers a variety of features that make note taking straightforward.
 
 ### Features
 - Render Markdown as a webpage
