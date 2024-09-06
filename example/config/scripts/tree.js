@@ -1,9 +1,33 @@
-const folders = document.querySelectorAll(".folder");
+document.addEventListener("DOMContentLoaded", function () {
+  const folders = document.querySelectorAll(".folder");
 
-for (const folder of folders) {
-  folder.onclick = () => {
+  folders.forEach((folder) => {
+    folder.addEventListener("click", function (event) {
+      event.stopPropagation();
+      toggleFolder(this);
+    });
+
+    folder.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleFolder(this);
+      }
+    });
+  });
+
+  function toggleFolder(folder) {
     folder.classList.toggle("active");
-    const target_list = folder.nextElementSibling;
-    target_list.style.maxHeight = target_list.style.maxHeight ? null : "100vh";
-  };
-}
+    const nestedItem = folder.nextElementSibling;
+    if (nestedItem && nestedItem.classList.contains("nested-item")) {
+      nestedItem.classList.toggle("active");
+    }
+  }
+
+  // Add mobile sidebar toggle functionality
+  const indexToggle = document.querySelector("#nav h2");
+  const fileTree = document.getElementById("file-tree");
+
+  indexToggle.addEventListener("click", function () {
+    fileTree.classList.toggle("active");
+  });
+});

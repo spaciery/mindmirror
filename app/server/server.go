@@ -94,30 +94,29 @@ func serveIndex(w http.ResponseWriter, r *http.Request) {
 	}
 
 	tmpl := `
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MindMirror</title>
-   <link rel="stylesheet" href="/styles/water-auto.css">
-   <link rel="stylesheet" href="/styles/imhome.css">
+    <link rel="icon" href="/styles/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/server.css">
 </head>
 <body>
-    <div id='nav'>
-    <h1>MindMirror_</h1>
-    <h2>↙ Index</h1>
+    <div id="nav">
+        <h1>MindMirror_</h1>
+        <h2>↙ Index</h2>
     </div>
     <div id="body-cont">
-    <div id="image">
-    <img id="randomImage" alt="Random Image" style="max-width: 100%; height: auto;">
-    </div>
-    <div id="file-tree">
-        {{.}}
+        <div id="file-tree">
+            {{.}}
         </div>
+
     </div>
     <script src="/scripts/tree.js"></script>
     <script src="/scripts/image.js"></script>
+    <script src="/scripts/theme.js"></script>
 </body>
 </html>
 `
